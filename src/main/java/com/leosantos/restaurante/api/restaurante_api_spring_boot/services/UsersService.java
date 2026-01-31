@@ -13,16 +13,17 @@ public class UsersService {
 
     public UsersService(UsersRepository usersRepository, HashService hashService) {
         this.usersRepository = usersRepository;
-        this.hashService= hashService;
+        this.hashService = hashService;
     }
 
-    public UsersEntity create(UsersEntity user) {
+    public boolean create(UsersEntity user) {
         usersRepository.findByEmail(user.getEmail())
                 .ifPresent(u -> {
                     throw new UserAlreadyExistsException(user.getEmail());
                 });
         String hashedPassword = hashService.hash(user.getPassword());
         user.setPassword(hashedPassword);
-        return this.usersRepository.save(user);
+        this.usersRepository.save(user);
+        return true;
     }
 }

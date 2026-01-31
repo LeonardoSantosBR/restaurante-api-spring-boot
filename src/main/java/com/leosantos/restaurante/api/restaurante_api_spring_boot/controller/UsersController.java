@@ -18,7 +18,7 @@ public class UsersController {
     }
 
     @PostMapping
-    public UsersEntity create(@RequestBody UsersEntity user){
+    public boolean create(@RequestBody UsersEntity user){
         return this.usersService.create(user);
     }
 }
