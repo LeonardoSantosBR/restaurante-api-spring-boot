@@ -12,16 +12,16 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class UsersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    public String name;
 
     @Column(nullable = false)
-    private String email;
+    public String email;
 
     @Column(nullable = false)
     private String password;
@@ -50,6 +50,9 @@ public class Users {
     public String getEmail() {
         return email;
     }
+    public String getPassword() {
+        return password;
+    }
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -66,6 +69,9 @@ public class Users {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
