@@ -31,11 +31,7 @@ public class AuthService {
             throw new WrongPasswordException();
         }
 
-        TokenDto tokenDto = new TokenDto(
-                user.getId(),
-                user.getName(),
-                user.getEmail());
-
+        TokenDto tokenDto = new TokenDto(user.getId(), user.getName(), user.getEmail());
         String token = jwtService.generateToken(tokenDto);
         return new SigninResponse(token);
     }

@@ -20,6 +20,6 @@ public class AuthController {
 
     @PostMapping
     public SigninResponse signin(@RequestBody AuthDto body){
-        return this.authService.signin(body.email, body.password);
+        return this.authService.signin(body.getEmail(), body.getPassword());
     }
 }
