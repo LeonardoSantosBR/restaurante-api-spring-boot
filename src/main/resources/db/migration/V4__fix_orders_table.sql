@@ -1,10 +1,10 @@
 CREATE TABLE orders
 (
-    id BIGINT NOT NULL
+    id CHAR(36) NOT NULL,
+
+    order_number INT NOT NULL
     AUTO_INCREMENT,
 
-    order_number VARCHAR
-    (255) NOT NULL,
     title VARCHAR
     (255) NOT NULL,
     description VARCHAR
@@ -18,6 +18,7 @@ CREATE TABLE orders
     deleted_at DATETIME NULL,
 
     PRIMARY KEY
-    (id)
+    (id),
+    UNIQUE KEY uk_orders_order_number
+    (order_number)
 ) ENGINE=InnoDB;
-//QUERY FOI MODIFICADA

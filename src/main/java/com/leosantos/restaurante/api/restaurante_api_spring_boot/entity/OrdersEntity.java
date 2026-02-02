@@ -1,6 +1,7 @@
 package com.leosantos.restaurante.api.restaurante_api_spring_boot.entity;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import com.leosantos.restaurante.api.restaurante_api_spring_boot.enums.OrderStatus;
 
@@ -8,8 +9,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
@@ -18,11 +17,10 @@ import jakarta.persistence.Table;
 @Table(name = "orders")
 public class OrdersEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
-    public String orderNumber;
+    @Column(name = "order_number", nullable = false, updatable = false, insertable = false)
+    public Long orderNumber;
 
     @Column(nullable = false)
     public String title;
@@ -34,50 +32,61 @@ public class OrdersEntity {
     @Column(nullable = false)
     private OrderStatus status;
 
-    @Column(nullable = false, updatable = true)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = true, updatable = true)
+    @Column(name = "updated_at", nullable = true, updatable = true)
     private LocalDateTime updatedAt;
 
-    @Column(nullable = true, updatable = true)
+    @Column(name = "deleted_at", nullable = true, updatable = true)
     private LocalDateTime deletedAt;
 
     @PrePersist
-    public void createdAtPrePersist(){
+    public void createdAtPrePersist() {
+        if (this.id == null) { // importante!
+            this.id = UUID.randomUUID().toString();
+        }
         this.createdAt = LocalDateTime.now();
     }
 
-    //getters
-    public Long getId() {
+    // getters
+    public String getId() {
         return id;
     }
-    public String getOrderNumber() {
+
+    public Long getOrderNumber() {
         return orderNumber;
     }
+
     public String getTitle() {
         return title;
     }
+
     public String getDescription() {
         return description;
     }
+
     public OrderStatus getStatus() {
         return status;
     }
 
-    //setters
-    public void setId(Long id) {
+    // setters
+    public void setId(String id) {
         this.id = id;
     }
-    public void setOrderNumber(String orderNumber) {
+
+    public void setOrderNumber(Long orderNumber) {
         this.orderNumber = orderNumber;
     }
+
     public void getTitle(String title) {
         this.title = title;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public void setStatus(OrderStatus status) {
         this.status = status;
     }

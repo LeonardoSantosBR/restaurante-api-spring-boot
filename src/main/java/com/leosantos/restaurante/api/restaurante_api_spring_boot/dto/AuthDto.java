@@ -4,7 +4,9 @@ public class AuthDto {
     public String email;
     public String password;
 
-    public AuthDto() {
+    public AuthDto(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     // getters

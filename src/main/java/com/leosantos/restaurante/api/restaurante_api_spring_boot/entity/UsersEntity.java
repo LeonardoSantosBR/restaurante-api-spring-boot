@@ -26,56 +26,66 @@ public class UsersEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, updatable = true)
+    @Column(name = "created_at", nullable = false, updatable = true)
     private LocalDateTime createdAt;
 
-    @Column(nullable = true, updatable = true)
+    @Column(name = "updated_at", nullable = true, updatable = true)
     private LocalDateTime updatedAt;
 
-    @Column(nullable = true, updatable = true)
+    @Column(name = "deleted_at", nullable = true, updatable = true)
     private LocalDateTime deletedAt;
 
     @PrePersist
-    public void createdAtPrePersist(){
+    public void createdAtPrePersist() {
         this.createdAt = LocalDateTime.now();
     }
 
-    //getters
+    // getters
     public Long getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getEmail() {
         return email;
     }
+
     public String getPassword() {
         return password;
     }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
+
     public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
 
-    //setters
+    // setters
     public void setName(String name) {
         this.name = name;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
     public void setDeleteddAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
