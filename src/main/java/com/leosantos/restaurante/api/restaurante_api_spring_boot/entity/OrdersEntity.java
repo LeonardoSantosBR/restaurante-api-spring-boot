@@ -42,7 +42,7 @@ public class OrdersEntity {
     private LocalDateTime deletedAt;
 
     @PrePersist
-    public void createdAtPrePersist() {
+    public void prePersists() {
         if (this.id == null) { // importante!
             this.id = UUID.randomUUID().toString();
         }
