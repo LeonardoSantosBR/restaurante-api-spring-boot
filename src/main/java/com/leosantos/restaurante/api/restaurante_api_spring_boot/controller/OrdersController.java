@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.leosantos.restaurante.api.restaurante_api_spring_boot.entity.OrdersEntity;
 import com.leosantos.restaurante.api.restaurante_api_spring_boot.services.OrdersService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping("/orders")
@@ -33,6 +35,11 @@ public class OrdersController {
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer limit) {
         return this.ordersService.findAll(page, limit).getContent();
+    }
+
+    @PutMapping("/{id}")
+    public boolean update(@PathVariable String id, @RequestBody OrdersEntity  body) {
+        return this.ordersService.update(id, body);        
     }
 
     @DeleteMapping("/{id}")

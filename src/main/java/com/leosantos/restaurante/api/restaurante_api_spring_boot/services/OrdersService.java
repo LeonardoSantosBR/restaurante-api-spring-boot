@@ -1,5 +1,7 @@
 package com.leosantos.restaurante.api.restaurante_api_spring_boot.services;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -7,6 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.leosantos.restaurante.api.restaurante_api_spring_boot.entity.OrdersEntity;
+import com.leosantos.restaurante.api.restaurante_api_spring_boot.enums.OrderStatus;
+import com.leosantos.restaurante.api.restaurante_api_spring_boot.exception.OrdersNotExistsException;
 import com.leosantos.restaurante.api.restaurante_api_spring_boot.repositories.OrdersRepository;
 
 @Service
@@ -32,7 +36,19 @@ public class OrdersService {
                 safeLimit,
                 Sort.by(Sort.Direction.DESC, "createdAt"));
 
-        return ordersRepository.findAll(pageable);
+        return ordersRepository.findAllByStatus(OrderStatus.IN_PROGRESS, pageable);
+    }
+
+    public boolean update(String id, OrdersEntity body) {
+        OrdersEntity order = ordersRepository.findById(id).orElseThrow(() -> new OrdersNotExistsException(id));
+
+        order.setTitle(body.getTitle());
+        order.setDescription(body.getDescription());
+        order.setStatus(body.getStatus());
+        order.setUpdatedAt(LocalDateTime.now());
+
+        ordersRepository.save(order);
+        return true;
     }
 
     public boolean delete(String id) {

@@ -79,7 +79,7 @@ public class OrdersEntity {
         this.orderNumber = orderNumber;
     }
 
-    public void getTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -89,5 +89,9 @@ public class OrdersEntity {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
