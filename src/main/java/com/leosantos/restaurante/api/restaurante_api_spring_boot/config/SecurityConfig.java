@@ -16,6 +16,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    //Ele define as regras de CORS:
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -30,6 +31,7 @@ public class SecurityConfig {
         return source;
     }
 
+    //Ele ativa e aplica as regras definidas acima dentro do Spring Security
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
