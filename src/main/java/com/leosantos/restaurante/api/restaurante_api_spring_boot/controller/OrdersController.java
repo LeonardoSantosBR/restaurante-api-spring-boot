@@ -2,7 +2,9 @@ package com.leosantos.restaurante.api.restaurante_api_spring_boot.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +33,10 @@ public class OrdersController {
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer limit) {
         return this.ordersService.findAll(page, limit).getContent();
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable String id) {
+        return this.ordersService.delete(id);
     }
 }

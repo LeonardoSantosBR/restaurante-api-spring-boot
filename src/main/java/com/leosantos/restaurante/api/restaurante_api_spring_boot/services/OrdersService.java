@@ -34,4 +34,11 @@ public class OrdersService {
 
         return ordersRepository.findAll(pageable);
     }
+
+    public boolean delete(String id) {
+        if (!ordersRepository.existsById(id))
+            return false;
+        ordersRepository.deleteById(id);
+        return true;
+    }
 }
