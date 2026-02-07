@@ -1,7 +1,11 @@
 package com.leosantos.restaurante.api.restaurante_api_spring_boot.exception;
 
-public class UserAlreadyExistsException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+import com.leosantos.restaurante.api.restaurante_api_spring_boot.config.ApiException;
+
+public class UserAlreadyExistsException extends ApiException {
     public UserAlreadyExistsException(String email) {
-        super("Já existe um usuário cadastrado com o email: " + email);
+        super(HttpStatus.CONFLICT, "Já existe um usuário cadastrado com o email: " + email);
     }
 }

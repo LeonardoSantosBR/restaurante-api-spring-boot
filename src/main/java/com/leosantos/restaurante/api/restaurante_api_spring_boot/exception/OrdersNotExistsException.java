@@ -1,7 +1,11 @@
 package com.leosantos.restaurante.api.restaurante_api_spring_boot.exception;
 
-public class OrdersNotExistsException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+import com.leosantos.restaurante.api.restaurante_api_spring_boot.config.ApiException;
+
+public class OrdersNotExistsException extends ApiException {
     public OrdersNotExistsException(String id) {
-        super("Não existe pedido com id: " + id);
+        super(HttpStatus.NOT_FOUND, "Não existe pedido com id: " + id);
     }
 }

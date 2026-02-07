@@ -15,7 +15,6 @@ import com.leosantos.restaurante.api.restaurante_api_spring_boot.entity.OrdersEn
 import com.leosantos.restaurante.api.restaurante_api_spring_boot.services.OrdersService;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
 @RestController
 @RequestMapping("/orders")
 public class OrdersController {
@@ -32,14 +31,13 @@ public class OrdersController {
 
     @GetMapping
     public List<OrdersEntity> findAll(
-            @RequestParam(defaultValue = "1") Integer page,
-            @RequestParam(defaultValue = "10") Integer limit) {
-        return this.ordersService.findAll(page, limit).getContent();
+            @RequestParam(defaultValue = "3") Integer limit) {
+        return this.ordersService.findAll(limit).getContent();
     }
 
     @PutMapping("/{id}")
-    public boolean update(@PathVariable String id, @RequestBody OrdersEntity  body) {
-        return this.ordersService.update(id, body);        
+    public boolean update(@PathVariable String id, @RequestBody OrdersEntity body) {
+        return this.ordersService.update(id, body);
     }
 
     @DeleteMapping("/{id}")

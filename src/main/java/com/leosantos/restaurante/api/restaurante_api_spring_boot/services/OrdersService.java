@@ -26,13 +26,12 @@ public class OrdersService {
         return true;
     }
 
-    public Page<OrdersEntity> findAll(Integer page, Integer limit) {
-        int safePage = (page == null || page < 1) ? 1 : page;
+    public Page<OrdersEntity> findAll(Integer limit) {
         int safeLimit = (limit == null || limit < 1) ? 10 : limit;
         safeLimit = Math.min(safeLimit, 100);
 
         Pageable pageable = PageRequest.of(
-                safePage - 1,
+                0,
                 safeLimit,
                 Sort.by(Sort.Direction.DESC, "createdAt"));
 
